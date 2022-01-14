@@ -3,6 +3,10 @@ import React, {useState} from 'react';
 import './App.css';
 import { Nav, Navbar, Container, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
 import Data from './data';
+import Detail from './Detail';
+
+import { Link, Route, Switch } from 'react-router-dom';
+
 
 function App() {
 
@@ -13,7 +17,7 @@ function App() {
 
   <Navbar bg="light" expand="lg">
     <Container fluid>
-      <Navbar.Brand href="#">Silver Star Shop</Navbar.Brand>
+      <Navbar.Brand href="/">Silver Star Shop</Navbar.Brand>
       <Navbar.Toggle aria-controls="navbarScroll" />
       <Navbar.Collapse id="navbarScroll">
         <Nav
@@ -21,8 +25,9 @@ function App() {
           style={{ maxHeight: '100px' }}
           navbarScroll
         >
-          <Nav.Link href="#action1">Home</Nav.Link>
-          <Nav.Link href="#action2">Link</Nav.Link>
+          <Nav.Link > <Link to="/">Home</Link></Nav.Link>
+          <Nav.Link href="/detail">Detail</Nav.Link>
+          <Nav.Link > <Link to="/detail">Detail</Link></Nav.Link>
           <NavDropdown title="Link" id="navbarScrollingDropdown">
             <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
             <NavDropdown.Item href="#action4">Another action</NavDropdown.Item>
@@ -48,31 +53,53 @@ function App() {
     </Container>
   </Navbar>
 
-  <div className="jumbotron">
-  <h1>20% Season Off</h1>
-  <p>
-    This is a simple hero unit, a simple jumbotron-style component for calling
-    extra attention to featured content or information.
-  </p>
-  <p>
-    <Button variant="primary">Learn more</Button>
-  </p>
-</div>
 
-<div className="container">
-  <div className="row">
-    {
-      향수.map((a,i)=>{
-        return <Card 향수={향수[i]} i={i} key={i}/>
-      })
-    }
+    <Switch>
 
-  </div>
-</div>
+      <Route exact path="/">
+      <div className="jumbotron">
+          <h1>20% Season Off</h1>
+          <p>
+            This is a simple hero unit, a simple jumbotron-style component for calling
+            extra attention to featured content or information.
+          </p>
+          <p>
+            <Button variant="primary">Learn more</Button>
+          </p>
+        </div>
+
+        <div className="container">
+          <div className="row">
+            {
+              향수.map((a,i)=>{
+                return <Card 향수={향수[i]} i={i} key={i}/>
+              })
+            }
+
+          </div>
+        </div>
+        
+      </Route>
+
+
+      <Route path="/detail">
+        <Detail />
+      </Route>
+
+      {/* <Route path="compo" component={ Card } ></Route> */}
+
+      <Route path="/:id">
+        <div>아무거나 적었을때 이거 보여주셈</div>
+
+      </Route>
+
+    </Switch>
+
 
     </div>
   );
 }
+
 
 function Card(props){
   return(
