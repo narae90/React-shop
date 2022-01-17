@@ -82,8 +82,8 @@ function App() {
       </Route>
 
 
-      <Route path="/detail">
-        <Detail />
+      <Route path="/detail/:id">
+        <Detail 향수={향수}/>
       </Route>
 
       {/* <Route path="compo" component={ Card } ></Route> */}
@@ -106,7 +106,7 @@ function Card(props){
     <div className="col-md-4">
       <img 
         src={ props.향수.img }
-        width="100%" height="50%"/>
+        width="100%" height="400px"/>
       <h4>{ props.향수.title }</h4>
       <p>{ props.향수.content} & { props.향수.price}</p>
     </div>
