@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import './Detail.scss';
 
-
+// styled-components의 큰 장점 : 컴포넌트가 많아지면 class 겹칠 일이 줄어듬
 let 박스 = styled.div`
     padding : 20px;
 `;
@@ -13,6 +14,23 @@ let 제목 = styled.h4`
 `;
 
 function Detail(props){
+
+    let [alert, alert변경] = useState(true);
+    let [inputData, inputData변경] = useState('');
+
+
+    // 컴포넌트가 mount 되었을때 
+    // 컴포넌트가 update 될때
+    // 특정 코드를 실행할 수 있음, 여러개 사용할수 있음
+    useEffect(()=>{
+        let 타이머 = setTimeout(()=>{ alert변경(false) }, 2000);
+        return ()=>{ clearTimeout(타이머) }
+
+    },[alert]); // 특정 state가 변경될 때만 실행 단, 조건이 없을 경우 등장시 한번 실행하고 끝남
+
+
+
+
 
     let { id } = useParams();
     let history = useHistory();
@@ -28,8 +46,21 @@ function Detail(props){
         <div className="container">
             <박스>
                 <제목>상세페이지</제목>
-                <제목 색상="blue" >Detail</제목>
+                <제목 className="blue" >Detail</제목>
             </박스>
+
+            { inputData }
+            <input onChange={(e)=>{ inputData변경( e.target.value )}}/>
+
+            {
+                alert === true 
+                ? (<div className="my-alert">
+                    <p>재고가 얼마 남지 않았습니다.</p>
+                    </div>)
+                : null
+            }
+
+
             <div className="row">
                 <div className="col-md-6">
                     <img src={ 찾은상품.img } 
