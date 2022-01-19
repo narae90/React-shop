@@ -4,6 +4,7 @@ import './App.css';
 import { Nav, Navbar, Container, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
 import Data from './data';
 import Detail from './Detail';
+import axios from 'axios';
 
 import { Link, Route, Switch } from 'react-router-dom';
 
@@ -11,6 +12,7 @@ import { Link, Route, Switch } from 'react-router-dom';
 function App() {
 
   let [향수, 향수변경] = useState(Data);
+  let [재고, 재고변경] = useState([10,11,12]);
 
   return (
     <div className="App">
@@ -77,13 +79,28 @@ function App() {
             }
 
           </div>
+          <button className="btn btn-primary" onClick={()=>{
+
+            
+
+            axios.get('https://codingapple1.github.io/shop/data2.json')
+            .then((result)=>{
+              console.log('성공')
+              향수변경( [...향수, ...result.data ] );
+
+            })
+            .catch(()=>{
+              console.log('실패')
+            })
+
+          }}>더보기</button>
         </div>
         
       </Route>
 
 
       <Route path="/detail/:id">
-        <Detail 향수={향수}/>
+        <Detail 향수={향수} 재고={재고} 재고변경={재고변경}/>
       </Route>
 
       {/* <Route path="compo" component={ Card } ></Route> */}
