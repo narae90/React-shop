@@ -3,8 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+// import * as serviceWorker from './serviceWorker';
 
 import { BrowserRouter } from 'react-router-dom'
+
+import {Provider} from 'react-redux';
+import { createStore } from 'redux';
+
+let store = createStore(()=>{ return [{ id: 0, name : '멋진향수', quan : 2 }] });
 
 
 
@@ -12,7 +18,9 @@ import { BrowserRouter } from 'react-router-dom'
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </BrowserRouter>
     
   </React.StrictMode>,

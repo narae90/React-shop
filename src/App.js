@@ -3,7 +3,10 @@ import React, {useContext, useState} from 'react';
 import './App.css';
 import { Nav, Navbar, Container, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
 import Data from './data';
+
 import Detail from './Detail';
+import Cart from './Cart';
+
 import axios from 'axios';
 import { Link, Route, Switch } from 'react-router-dom';
 
@@ -113,6 +116,10 @@ function App() {
       </Route>
 
       {/* <Route path="compo" component={ Card } ></Route> */}
+
+      <Route path="/cart">
+        <Cart></Cart>
+      </Route>
 
       <Route path="/:id">
         <div>아무거나 적었을때 이거 보여주셈</div>

@@ -92,13 +92,13 @@ function Detail(props){
 
             <Nav className="mt-5" variant="tabs" defaultActiveKey="link-0">
                 <Nav.Item>
-                    <Nav.Link eventKey="link-0" onClick={()=>{ 스위치변경(false); 누른탭변경(0) }}>Active</Nav.Link>
+                    <Nav.Link eventKey="link-0" onClick={()=>{ 스위치변경(false); 누른탭변경(0) }}>상품 설명</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link eventKey="link-1"  onClick={()=>{ 스위치변경(false);누른탭변경(1) }}>Option 2</Nav.Link>
+                    <Nav.Link eventKey="link-1"  onClick={()=>{ 스위치변경(false);누른탭변경(1) }}>배송 안내</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link eventKey="link-2"  onClick={()=>{ 스위치변경(false); 누른탭변경(2) }}>Option 2</Nav.Link>
+                    <Nav.Link eventKey="link-2"  onClick={()=>{ 스위치변경(false); 누른탭변경(2) }}>리뷰</Nav.Link>
                 </Nav.Item>
             </Nav>
             
