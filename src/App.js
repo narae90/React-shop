@@ -1,12 +1,13 @@
 import logo from './logo.svg';
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import './App.css';
 import { Nav, Navbar, Container, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
 import Data from './data';
 import Detail from './Detail';
 import axios from 'axios';
-
 import { Link, Route, Switch } from 'react-router-dom';
+
+export let 재고context = React.createContext();
 
 
 function App() {
@@ -71,14 +72,22 @@ function App() {
         </div>
 
         <div className="container">
+
+
+          <재고context.Provider value={재고}>
+
           <div className="row">
             {
               향수.map((a,i)=>{
                 return <Card 향수={향수[i]} i={i} key={i}/>
               })
             }
-
           </div>
+
+          </재고context.Provider>
+
+
+
           <button className="btn btn-primary" onClick={()=>{
 
             
@@ -119,17 +128,24 @@ function App() {
 
 
 function Card(props){
+
+  let 재고 = useContext(재고context);
   return(
     <div className="col-md-4">
       <img 
-        src={ props.향수.img }
+        src={ props.향수.img + (props.i + 1)}
         width="100%" height="400px"/>
       <h4>{ props.향수.title }</h4>
       <p>{ props.향수.content} & { props.향수.price}</p>
+      <Test></Test>
     </div>
 
-    
-  );
+  )
+}
+
+function Test(){
+  let 재고 = useContext(재고context);
+  return <p>재고 : {재고[0]}</p>
 }
 
 export default App;
