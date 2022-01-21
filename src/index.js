@@ -10,8 +10,38 @@ import { BrowserRouter } from 'react-router-dom'
 import {Provider} from 'react-redux';
 import { createStore } from 'redux';
 
-let store = createStore(()=>{ return [{ id: 0, name : '멋진향수', quan : 2 }] });
 
+
+
+let 초기값 =[
+  { id: 0, name : '샤넬 향수', quan : 6 }, 
+  {id: 1, name : '디올 향수', quan : 4},
+  {id: 2, name : '딥디크 향수', quan : 9}
+
+];
+
+
+function reducer(state = 초기값, 액션){
+  if(액션.type === '수량증가'){
+
+    let copy = [...state];
+    copy[0].quan++;
+    return copy
+
+  }else if(액션.type === '수량감소'){
+    let copy = [...state];
+    copy[0].quan--;
+    return copy
+
+  }else {  
+    return state
+  }
+
+}
+
+
+
+let store = createStore(reducer);
 
 
 
