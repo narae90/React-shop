@@ -17,6 +17,7 @@ $maincolor : rgb(245, 155, 155);
     color: $maincolor;
 }
 
+
 @mixin 함수() {
     background: #eee;
     padding: 20px;
@@ -33,7 +34,7 @@ $maincolor : rgb(245, 155, 155);
 
 .my-alert2 {
     @extend .my-alert;
-    background: rgb(252, 252, 113);
+    background: rgb(175, 243, 166);
 }
 
 

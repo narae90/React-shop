@@ -1,11 +1,14 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { Nav} from 'react-bootstrap';
 import styled from 'styled-components';
-import './Detail.scss';
-import {재고context} from './App';
 
-import {  CSSTransition } from "react-transition-group";
+import './Detail.scss';
+import { 재고context } from './App';
+import { CSSTransition } from "react-transition-group";
+
+import { Nav } from 'react-bootstrap';
+import { connect } from 'react-redux';
+
 
 // styled-components의 큰 장점 : 컴포넌트가 많아지면 class 겹칠 일이 줄어듬
 let 박스 = styled.div`
@@ -56,8 +59,8 @@ function Detail(props){
                 <제목 className="blue" >Detail</제목>
             </박스>
 
-            { inputData }
-            <input onChange={(e)=>{ inputData변경( e.target.value )}}/>
+            {/* { inputData }
+            <input onChange={(e)=>{ inputData변경( e.target.value )}}/> */}
 
             {
                 alert === true 
@@ -81,14 +84,20 @@ function Detail(props){
 
                     <Info 재고={props.재고}></Info>
 
-                    <button className="btn btn-danger" onClick={ ()=>{ props.재고변경([9,11,12]) } }>주문하기</button> 
+                    <button className="btn btn-danger" onClick={ ()=>{ 
+                        
+                        props.재고변경([9,11,12]);
+                        props.dispatch({type : '항목추가', payload : {id:2, name:'새로운상품', quan:1} });
+                        history.push('/cart');
+                        
+                        }}>주문하기</button> 
                     <button className="btn btn-primary" onClick={ ()=>{
-                        history.goBack();
-                        // history.push('/');
+                        // history.goBack();
+                        history.push('/');
                     } }>뒤로가기</button> 
-
                 </div>
             </div>
+
 
             <Nav className="mt-5" variant="tabs" defaultActiveKey="link-0">
                 <Nav.Item>
@@ -135,4 +144,16 @@ function TabContent(props){
     }
 
 
-export default Detail;
+    function state를props화(state){
+        console.log(state);
+        return{
+            state : state,
+            alert열렸니 : state.reducer2
+        }
+    
+    }
+    
+    export default connect(state를props화)(Detail)
+
+
+// export default Detail;
