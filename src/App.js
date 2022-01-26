@@ -8,7 +8,7 @@ import Detail from './Detail';
 import Cart from './Cart';
 
 import axios from 'axios';
-import { Link, Route, Switch } from 'react-router-dom';
+import { Link, Route, Switch, useHistory } from 'react-router-dom';
 
 export let 재고context = React.createContext();
 
@@ -82,7 +82,7 @@ function App() {
           <div className="row">
             {
               향수.map((a,i)=>{
-                return <Card 향수={향수[i]} i={i} key={i}/>
+                return (<Card 향수={향수[i]} i={i} key={i} />)
               })
             }
           </div>
@@ -137,8 +137,9 @@ function App() {
 function Card(props){
 
   let 재고 = useContext(재고context);
+  let history = useHistory();
   return(
-    <div className="col-md-4">
+    <div className="col-md-4" onClick={()=>{ history.push('/detail/' + props.향수.id)}}>
       <img 
         src={ props.향수.img + (props.i + 1)}
         width="100%" height="400px"/>
