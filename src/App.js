@@ -1,14 +1,16 @@
 import logo from './logo.svg';
-import React, {useContext, useState} from 'react';
+import React, {useContext, useState, lazy, Suspense } from 'react';
 import './App.css';
 import { Nav, Navbar, Container, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
-import Data from './data';
-
-import Detail from './Detail';
-import Cart from './Cart';
 
 import axios from 'axios';
 import { Link, Route, Switch, useHistory } from 'react-router-dom';
+// import { connect } from 'react-redux';
+import Cart from './Cart';
+
+import Data from './data';
+// import Detail from './Detail';
+let Detail = lazy(()=> import('./Detail') );
 
 export let 재고context = React.createContext();
 
@@ -17,6 +19,7 @@ function App() {
 
   let [향수, 향수변경] = useState(Data);
   let [재고, 재고변경] = useState([10,11,12]);
+  // let [cart, cart변경] = useState([{id: 0, name : 'Nomade Eau de Parfum', quan : 0}]);
 
   return (
     <div className="App">
@@ -33,7 +36,7 @@ function App() {
         >
           <Nav.Link as={Link} to="/">Home</Nav.Link>
           <Nav.Link href="/detail">Detail</Nav.Link>
-          <Nav.Link as={Link} to="/detail">Detail</Nav.Link>
+          <Nav.Link as={Link} to="/cart">Cart</Nav.Link>
           <NavDropdown title="Link" id="navbarScrollingDropdown">
             <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
             <NavDropdown.Item href="#action4">Another action</NavDropdown.Item>
@@ -42,9 +45,6 @@ function App() {
               Something else here
             </NavDropdown.Item>
           </NavDropdown>
-          <Nav.Link href="#" disabled>
-            Link
-          </Nav.Link>
         </Nav>
         <Form className="d-flex">
           <FormControl
@@ -112,7 +112,11 @@ function App() {
 
 
       <Route path="/detail/:id">
-        <Detail 향수={향수} 재고={재고} 재고변경={재고변경}/>
+        {/* <재고context.Provider value={재고}> */}
+        <Suspense fallback={<div>로딩중이예요</div>}>
+          <Detail 향수={향수} 재고={재고} 재고변경={재고변경}/>
+        </Suspense>
+        {/* </재고context.Provider> */}
       </Route>
 
       {/* <Route path="compo" component={ Card } ></Route> */}

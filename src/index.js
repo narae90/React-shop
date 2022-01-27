@@ -26,9 +26,9 @@ function reducer2(state = alert초기값, 액션){
 
 
 let 초기값 =[
-  { id: 0, name : '샤넬 향수', quan : 6 }, 
-  {id: 1, name : '디올 향수', quan : 4},
-  {id: 2, name : '딥디크 향수', quan : 9}
+  { id: 0, name : 'N°5', quan : 0 }, 
+  {id: 1, name : 'IRRESISTIBLE', quan : 0},
+  {id: 2, name : 'Nomade Eau de Parfum', quan : 0}
 
 ];
 
